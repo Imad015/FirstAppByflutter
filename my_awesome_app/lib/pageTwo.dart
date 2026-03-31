@@ -1,8 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class PageTwo extends StatelessWidget {
+class PageTwo extends StatefulWidget {
   const PageTwo({super.key});
+  @override
+  State<PageTwo> createState() => _PageTwo();
+}
+
+class _PageTwo extends State<PageTwo> {
+  double result = 0;
+  final TextEditingController textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final border = OutlineInputBorder(
@@ -15,12 +22,17 @@ class PageTwo extends StatelessWidget {
     );
     return Scaffold(
       appBar: AppBar(
-        title: const Text("USD"),
-        titleTextStyle: TextStyle(
-          color: Colors.black,
-          fontWeight: FontWeight.bold,
-          fontSize: 20,
+        title: const Center(
+          child: Text(
+            "USD",
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
         ),
+        elevation: 30,
         actions: <Widget>[
           IconButton(icon: const Icon(Icons.menu), onPressed: () {}),
         ],
@@ -35,7 +47,8 @@ class PageTwo extends StatelessWidget {
             Container(
               margin: EdgeInsets.fromLTRB(0, 0, 0, 50),
               child: Text(
-                "0",
+                result.toString(),
+
                 style: const TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.bold,
@@ -47,6 +60,10 @@ class PageTwo extends StatelessWidget {
               padding: const EdgeInsets.all(20),
 
               child: TextField(
+                controller: textEditingController,
+                onSubmitted: (value) {
+                  print(value);
+                },
                 keyboardType: const TextInputType.numberWithOptions(
                   decimal: true,
                 ),
@@ -68,18 +85,19 @@ class PageTwo extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
-              child: TextButton(
-                onPressed: () { 
-                  if(kDebugMode){debugPrint("button clicked");}
+              child: ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    result = double.parse(textEditingController.text) * 133.32;
+                  });
                 },
-                 style: TextButton.styleFrom( 
+                style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(227, 226, 226, 1),
                   foregroundColor: Colors.black,
-                  fixedSize: Size(30, 30),
-                  minimumSize: Size(double.infinity,50),
+                  minimumSize: Size(double.infinity, 50),
+                  elevation: 5,
                 ),
-                child: const  Text("Convert"),
-              
+                child: const Text("Convert"),
               ),
             ),
           ],
