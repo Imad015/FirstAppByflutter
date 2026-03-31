@@ -9,7 +9,7 @@ class PageTwo extends StatefulWidget {
 
 class _PageTwo extends State<PageTwo> {
   double result = 0;
-  final TextEditingController textEditingController = TextEditingController();
+    final TextEditingController textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final border = OutlineInputBorder(
@@ -88,7 +88,7 @@ class _PageTwo extends State<PageTwo> {
               child: ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    result = double.parse(textEditingController.text) * 133.32;
+                    result = double.parse((double.parse(textEditingController.text) * 133.32).toStringAsFixed(2));
                   });
                 },
                 style: ElevatedButton.styleFrom(
