@@ -1,15 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class PageTwo extends StatefulWidget {
-  const PageTwo({super.key});
+class CurrencyConverterMaterialPage extends StatefulWidget {
+  const CurrencyConverterMaterialPage({super.key});
   @override
-  State<PageTwo> createState() => _PageTwo();
+  State<CurrencyConverterMaterialPage> createState() => _PageTwo(); 
 }
 
-class _PageTwo extends State<PageTwo> {
+class _PageTwo extends State<CurrencyConverterMaterialPage> {
   double result = 0;
-    final TextEditingController textEditingController = TextEditingController();
+  final TextEditingController textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final border = OutlineInputBorder(
@@ -38,6 +38,7 @@ class _PageTwo extends State<PageTwo> {
         ],
         backgroundColor: Colors.green[100],
         leading: const Icon(Icons.abc),
+        
       ),
       backgroundColor: Colors.blueGrey,
       body: Center(
@@ -47,7 +48,7 @@ class _PageTwo extends State<PageTwo> {
             Container(
               margin: EdgeInsets.fromLTRB(0, 0, 0, 50),
               child: Text(
-                result.toString(),
+                'Dz ${result != 0 ? result.toStringAsFixed(2) : result.toStringAsFixed(0)}',
 
                 style: const TextStyle(
                   fontSize: 40,
@@ -61,9 +62,6 @@ class _PageTwo extends State<PageTwo> {
 
               child: TextField(
                 controller: textEditingController,
-                onSubmitted: (value) {
-                  print(value);
-                },
                 keyboardType: const TextInputType.numberWithOptions(
                   decimal: true,
                 ),
@@ -88,7 +86,7 @@ class _PageTwo extends State<PageTwo> {
               child: ElevatedButton(
                 onPressed: () {
                   setState(() {
-                    result = double.parse((double.parse(textEditingController.text) * 133.32).toStringAsFixed(2));
+                    result = double.parse(textEditingController.text) * 133.32;
                   });
                 },
                 style: ElevatedButton.styleFrom(
